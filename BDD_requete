@@ -121,7 +121,7 @@ STATE_PROVINCE           VARCHAR2(25)
 COUNTRY_NAME             VARCHAR2(40) 
 REGION_NAME              VARCHAR2(25) 
 ________________________________________________________________________________________________________________
-
+2
 desc HR.EMPLOYEES
 desc HR.COUNTRIES
 desc HR.DEPARTMENTS
@@ -129,15 +129,28 @@ desc HR.LOCATIONS
 desc HR.JOBS
 desc HR.JOB_HISTORY
 desc HR.REGIONS
-desc HR.EMP_DETAILS_VIEW
+desc HR.EMP_DETAILS_VIEW;
 
+3
 select * from HR.EMPLOYEES where First_name like 'A%';
 
+4
 select * from HR.DEPARTMENTS D,HR.LOCATIONS L,HR.COUNTRIES C 
 Where D.location_ID = L.location_ID and L.COUNTRY_ID=C.COUNTRY_ID and C.COUNTRY_NAME like'U%';
 
+5
 Select D.DEPARTMENT_ID,D.DEPARTMENT_NAME ,count(D.DEPARTMENT_ID) nombre_employé from HR.EMPLOYEES E, HR.DEPARTMENTS D
 where E.DEPARTMENT_ID = D.DEPARTMENT_ID 
 group by D.DEPARTMENT_ID,D.DEPARTMENT_NAME
 having count(D.DEPARTMENT_ID)>10 ;
+
+6
+select E.EMPLOYEE_ID,count(*) from HR.EMPLOYEES E, HR.JOBS J
+where E.JOB_ID=J.JOB_ID
+group by E.EMPLOYEE_ID having count(*)=1;
+
+select E.EMPLOYEE_ID,count(*) from HR.EMPLOYEES E,HR.JOB_HISTORY J
+where E.JOB_ID=J.JOB_ID
+group by E.EMPLOYEE_ID
+having count(*)=1;
 
